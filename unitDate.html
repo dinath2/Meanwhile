@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.10.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.10.0.js"></script>
+  <script src="dateValid.js"></script>
+  
+  QUnit.test("is this a valid date?", function (assert) {
+    const isValid = isDateValid('03.02.2020');
+    assert.equal(isValid, true);
+  }
+
+  QUnit.test("Is the length correct?", function (assert) {
+    const isValid = isDateValid('3.2.2020');
+    assert.equal(isValid, false);
+  }
+
+  QUnit.test("Is there 2 punctuations where it should be?", function (assert) {
+    const isValid = isDateValid('03,02.2020');
+    assert.equal(isValid, false);
+  }
+
+  QUnit.test("Does the year have 4 characters?", function (assert) {
+    const isValid = isDateValid('03.02.20');
+    assert.equal(isValid, false);
+  }
+
+  QUnit.test("Does the month have 2 characters?", function (assert) {
+    const isValid = isDateValid('03.2.20');
+    assert.equal(isValid, false);
+  }
+
+  QUnit.test("Is the month something else than the specified 1 to 12?", function (assert) {
+    const isValid = isDateValid('03.13.20');
+    assert.equal(isValid, false);
+  }
+
+  QUnit.test("Is the day something else than the specified 1 to 31?", function (assert) {
+    const isValid = isDateValid('03.33.20');
+    assert.equal(isValid, false);
+  }
+
+  QUnit.test("Is there 31 days in a month that shouldn't have one?", function (assert) {
+    const isValid = isDateValid('03.33.20');
+    assert.equal(isValid, false);
+  }
+</body>
+</html>

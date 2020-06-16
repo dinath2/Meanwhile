@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Yessss</title>
+        <style>
+            body {
+                user-select: none;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: rgb(231, 231, 231);
+                text-align: center;
+            }
+            .buttons {
+                font-size: x-large;
+                color: blueviolet;
+            }
+            #computer {
+                color: rgb(17, 196, 196);
+            }
+            #player {
+                color: rgb(108, 194, 86);
+            }
+            #results {
+                color:white;
+            }
+            #ultimate {
+                color:gold; 
+            }
+        </style>
+    </head>
+    <body>
+
+        <img id="1" onclick="optionSelect(this)" height=300></img>
+        <img id="2" onclick="optionSelect(this)" height=300></img>
+        <img id="3" onclick="optionSelect(this)" height=300></img>
+        
+        <h1 id="computer">Computer says: </h1>
+        <h1 id="player">You say: </h1>
+        <h1 id="results"></h1>
+        <h1 id="ultimate"></h1>
+        
+        <select onchange="changeTheme(this.value)" id="themes">
+            <option selected disabled hidden>Pick a theme!</option>
+            <option value="classic">Classic</option>
+            <option value="household">Household Creatures</option>
+            <option value="noodles">Noodles</option>
+            <option value="pokemon">Pokemon</option>
+            <option value="fireemblem">Fire Emblem</option>
+            <option value="fightgame">Fighting Games</option>
+        </select>
+        <script>
+            //model
+            function $(id) {
+                return document.getElementById(id)
+            }
+            
+            classic = ["Rock", "Paper", "Scissors"];
+            classicPics = ["https://blog.csiro.au/wp-content/uploads/2019/11/ROCK-ROCK.jpg","http://www.call2actionmedia.com/wp-content/uploads/2015/05/paper-boy.jpg","https://i.ebayimg.com/images/g/yTAAAOSwZB9aFU~Z/s-l1600.jpg"]
+            
+            household = ["Dog", "Human", "Cat"];
+            householdPics = ["https://i.redd.it/szy08rpw5iw21.jpg","https://i.kym-cdn.com/entries/icons/original/000/016/546/hidethepainharold.jpg","https://cdn.discordapp.com/attachments/707543691211964447/710424870076284998/IMG_20200514_113432.jpg"]
+            
+            fightgame = ["Grab","Attack","Block"] 
+            fightgamePics = ["https://www.smashbros.com/wii/en_us/howto/basic/images/basic08/basic08_071107d-l.jpg", "https://venturebeat.com/wp-content/uploads/2013/03/mario-kick.jpg","http://i0.wp.com/shoryuken.com/wp-content/uploads/2015/10/Super-Smash-Bros.-for-Wii-U-Ganondorf-Pikachu.png"]
+
+            fireemblem = ["Axe","Sword","Lance"]
+            fireemblemPics = ["https://vignette.wikia.nocookie.net/fireemblem/images/8/89/FE_Heroes_Intro_Camilla.png/revision/latest?cb=20170205051619","https://vignette.wikia.nocookie.net/fireemblem/images/9/90/FE_Heroes_Intro_Alfonse.png/revision/latest?cb=20170205051609","https://vignette.wikia.nocookie.net/fireemblem/images/4/42/FE_Heroes_Intro_Sharena.png/revision/latest?cb=20170205051706"]
+
+            noodle = ["Ramen", "Udon", "Soba"];
+            noodlePics = ["https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shoyu_Ramen.jpg/1200px-Shoyu_Ramen.jpg", "https://omnivorescookbook.com/wp-content/uploads/2019/08/1405_Easy-Chicken-Udon-Soup_550.jpg", "https://www.acouplecooks.com/wp-content/uploads/2020/03/Soba-Noodles-016.jpg"]
+
+            pokemon = ["Grass", "Fire", "Water"];
+            pokemonPics = ["https://cdn.bulbagarden.net/upload/thumb/2/2c/252Treecko.png/900px-252Treecko.png","https://cdn.bulbagarden.net/upload/thumb/9/91/255Torchic.png/900px-255Torchic.png","https://cdn.bulbagarden.net/upload/thumb/6/60/258Mudkip.png/900px-258Mudkip.png"];
+            
+            var playerSelect = "what you select!";
+            var computerSelect = "what the computer selects!";
+            var loseOrWin = "either win or lose!";
+            var winsCounter = 0;
+            var loseCounter = 0;
+            var chosenTheme = classic;
+            var chosenPics = classicPics;
+            var beats = "beats"
+            options = {
+                1: "Rock",
+                2: "Paper",
+                3: "Scissors"
+            };
+            
+            //view
+            show();
+            function show(){
+                $("1").innerHTML = options[1];
+                $("2").innerHTML = options[2];
+                $("3").innerHTML = options[3];
+
+                $("1").src = chosenPics[0];
+                $("2").src = chosenPics[1];
+                $("3").src = chosenPics[2];
+            }
+
+            function draw() {
+                $("results").innerHTML = `Ya both picked ${playerSelect}!!! Try again.`;
+            }
+            function results() {
+                if (loseOrWin == "win") 
+                    {winsCounter++;}
+                else if (loseOrWin == "lose")
+                    {loseCounter++;}
+
+                $("results").innerHTML = `You ${loseOrWin}! ${winner} ${beats} ${loser}`; //swap around if computer wins!
+                if ((winsCounter >= 2) || (loseCounter >= 2)) {ultimateWinner();}
+            }
+            function ultimateWinner() {
+                $("ultimate").innerHTML = `You ${loseOrWin} best out of three!!!`
+            }
+
+            //controller
+            function changeTheme(theme) {
+                if (theme == "classic") {chosenTheme = classic; chosenPics = classicPics; beats = "beats";}
+                if (theme == "household") {chosenTheme = household; chosenPics = householdPics; beats = "owns the";}
+                if (theme == "noodles") {chosenTheme = noodle; chosenPics = noodlePics; beats = "out-noodles"}
+                if (theme == "pokemon") {chosenTheme = pokemon; chosenPics = pokemonPics; beats = "is super effective against";}
+                if (theme == "fireemblem") {chosenTheme = fireemblem; chosenPics = fireemblemPics; beats = "deals critical damage aganist";}
+                if (theme == "fightgame") {chosenTheme = fightgame; chosenPics = fightgamePics; beats = "beats"}
+                else {beats = "beats"}
+                itemKey = 1;
+                picKey = 1;
+                chosenTheme.forEach(item => {
+                    options[itemKey] = item;
+                    itemKey++;
+                });   
+                show();
+            }
+
+            function optionSelect(number) {
+                playerSelect = options[number.id];
+                var computerSelect = options[Math.floor((Math.random() * 3) + 1)];
+                console.log(playerSelect);
+                $("computer").innerHTML = `Computer says: ${computerSelect}`
+                $("player").innerHTML = `You say: ${playerSelect}`
+                
+                if ((playerSelect == options[1] && computerSelect == options[3]) ||
+                    (playerSelect == options[2] && computerSelect == options[1]) ||
+                    (playerSelect == options[3] && computerSelect == options[2])) {
+                        loseOrWin = "win"; winner = playerSelect; loser = computerSelect;
+                        results();
+                    }
+                else if (playerSelect == computerSelect) {
+                    draw();
+                } else {
+                    loseOrWin = "lose"; winner = computerSelect; loser = playerSelect;
+                    results();
+                }
+            }
+        </script>
+    </body>
+</html>
