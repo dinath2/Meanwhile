@@ -18,12 +18,12 @@
   }
 
   QUnit.test("Is the length correct?", function (assert) {
-    const isValid = isDateValid('3.2.2020');
+    const isValid = dateLength(date)('3.2.2020');
     assert.equal(isValid, false);
   }
 
   QUnit.test("Is there 2 punctuations where it should be?", function (assert) {
-    const isValid = isDateValid('03,02.2020');
+    const isValid = dateFormat(date)('03,02.2020');
     assert.equal(isValid, false);
   }
 
