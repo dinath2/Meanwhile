@@ -1,14 +1,12 @@
 function isDateValid(date){
     //ex: 03.02.2020
-const year = ;
-const month = ;
-const day = ;
-    //insert if
-dateLength;
-dateFormat;
-validYear;
-isLeapYear;
+const year = date.substring(6,9);
+const month = date.substring(4,5);
+const day = date.substring (0,2);
 
+    //insert if
+    if (dateLength(date) && dateFormat(date) && validYear(year) && isLeapYear(year)) 
+    {return true;} else {return false;}
 }
 
 function dateLength(date) {
