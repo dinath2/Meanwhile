@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Translate THIS pls!!!</title>
+    
+    <!-- 
+    - morse code?
+    - pig latin?
+    - meow language with sound?
+    
+    to be done: 
+    comparing two arrays and getting out the results!
+    
+    -->
+</head>
+<body>
+
+    <input id="input" oninput="update()"/>
+    <div id="result">Test</div>
+
+    <script>
+        //Model
+        function $(id) {return document.getElementById(id);}
+
+        const morseCodeArray =  [ '.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....',
+        '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.',
+        '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-',
+        '-.--', '--..', ' ', '·−·−', '−−−·', '·−−·−'];//4 siste er space, æ ,ø og å        
+        const abcdefghijklmnopqrstuvwxyzæøå = "abcdefghijklmnopqrstuvwxyzæøå"
+
+        //View
+        function update() {
+            let inputString = $("input").value;
+            let outputString = $("result").value;
+            console.log(inputString);
+
+            let index = 0;
+            while (index < 5) { 
+                // (no worky) let letternumber = abcdefghijklmnopqrstuvwxyzæøå.indexOf(inputString.charAt(index));
+                $("result").innerHTML += morseCodeArray[letternumber]
+                index++;
+            }
+        }
+        //Controller
+        // good night
+    </script>
+</body>
+</html>
