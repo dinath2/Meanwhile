@@ -1,0 +1,37 @@
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="test.js"></script>
+    <script>
+        QUnit.test("Can I choose a bar?", function (assert) {
+            var mail = email("help.me@now.pls");
+            assert.equal(mail, true);
+        });
+
+        QUnit.test("is this right, no @", function (assert) {
+            var mail = email("help.menow.pls");
+            assert.equal(mail, false);
+        });
+
+        QUnit.test("is this right, no punctuation", function (assert) {
+            var mail = email("helpme@nowpls");
+            assert.equal(mail, false);
+        });
+
+        QUnit.test("is this right, no punctuation before @", function (assert) {
+            var mail = email("helpme@now.pls");
+            assert.equal(mail, false);
+        });
+    </script>
+</body>
+</html>

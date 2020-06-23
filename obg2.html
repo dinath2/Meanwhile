@@ -33,8 +33,8 @@
                 Verdi:
                 <input type="number" min="1" max="10" oninput="inputValue = this.value" />
                 <button onclick="">Legg til stolpe</button>
-                <button disabled>Endre valgt stolpe</button><br />
-                <button disabled>Fjerne valgt stolpe</button>
+                <button onclick= "yourChosenBar" disabled>Endre valgt stolpe</button><br />
+                <button onclick= "yourChosenBar" disabled>Fjerne valgt stolpe</button>
                 `;
         }
     
@@ -71,15 +71,13 @@
         // controller
 
         function yourChosenBar(barNo){
-        if (chosenBar == barNo) {chosenBar = null;}
+        if (chosenBar == barNo) {chosenBar = null && ;}
         else { chosenBar = barNo;}
         show();
-        //a function that lights up the bar chosen
-        //a function that allows you to chose a bar
         }
 
         function removeBar(){
-        if () {}
+        if (chosenBar == barNo && ) {}
         else { }
         //removing a chosen bar, read up on splice
         show();

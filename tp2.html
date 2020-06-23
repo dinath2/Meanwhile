@@ -3,47 +3,76 @@
 <head>
     <meta charset="utf-8">
     <title>Translate THIS pls!!!</title>
-    
-    <!-- 
-    - morse code?
-    - pig latin?
-    - meow language with sound?
-    
-    to be done: 
-    comparing two arrays and getting out the results!
-    
-    -->
+    <style>
+        body {
+            text-align:center;
+            background-color: rgb(189, 182, 197);
+        }
+
+        #input {
+            height:24px;
+            width:300px;
+            font-size:large;
+        }
+        #result {
+            font-size:xx-large;
+            font-weight:bold;
+            color: rgb(11, 83, 112);
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            width: 500px;
+            margin: 0 auto 0 auto;
+            padding-top:20px;
+        }
+        button {
+            font-size:large;
+            background-color: rgb(36, 106, 146);
+            margin-left:35px;
+            padding:5px;
+            color:rgb(253, 253, 253);
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-
-    <input id="input" oninput="update()"/>
+    <img style="height: 245px" src="https://ak.picdn.net/shutterstock/videos/11208821/thumb/12.jpg">
+    <br></br>
+    <input id="input"/>
+    <button id="clicky" onclick="translator()">Translate!</button>
     <div id="result">Test</div>
 
     <script>
         //Model
         function $(id) {return document.getElementById(id);}
-
+        var translated = "";
+        var letternumber;
         const morseCodeArray =  [ '.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....',
         '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.',
         '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-',
-        '-.--', '--..', ' ', '·−·−', '−−−·', '·−−·−'];//4 siste er space, æ ,ø og å        
-        const abcdefghijklmnopqrstuvwxyzæøå = "abcdefghijklmnopqrstuvwxyzæøå"
+        '-.--', '--..', '/', '·−·−', '−−−·', '·−−·−'];//4 siste er space, æ ,ø og å        
+        const abcdefghijklmnopqrstuvwxyzæøå = "abcdefghijklmnopqrstuvwxyz æøå";
 
         //View
         function update() {
-            let inputString = $("input").value;
-            let outputString = $("result").value;
-            console.log(inputString);
-
-            let index = 0;
-            while (index < 5) { 
-                // (no worky) let letternumber = abcdefghijklmnopqrstuvwxyzæøå.indexOf(inputString.charAt(index));
-                $("result").innerHTML += morseCodeArray[letternumber]
-                index++;
-            }
+            translator();
         }
         //Controller
-        // good night
+        function translator() {
+            let inputDiv = $("input").value;
+
+            let index = 0;
+            while (index < inputDiv.length) {
+                letternumber = abcdefghijklmnopqrstuvwxyzæøå.indexOf(inputDiv.toLowerCase().charAt(index));
+                if (letternumber != -1) {
+                    translated += morseCodeArray[letternumber] + " ";
+                } else {
+                    translated += " [?] ";
+                }
+                index++;
+            }
+            $("result").innerHTML = translated;
+            translated = "";
+        }
     </script>
 </body>
 </html>
