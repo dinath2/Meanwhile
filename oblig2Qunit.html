@@ -11,26 +11,32 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
-    <script src="test.js"></script>
+    <script src="obg2controllers.js"></script>
     <script>
+        let numbers = [7,3,1,5,8];
+        let yourChosenBar;
+        let inputValue;
+        function show() {}
+
         QUnit.test("Can I choose a bar?", function (assert) {
-            var mail = email("help.me@now.pls");
-            assert.equal(mail, true);
+            chosenBar(barNo);
+            barNo = 3;
+            let expected = (3);
+            assert.deepEqual(barNo, expected);
         });
 
-        QUnit.test("is this right, no @", function (assert) {
-            var mail = email("help.menow.pls");
-            assert.equal(mail, false);
+        QUnit.test("Can I delete a bar?", function (assert) {
+            numbers = [7,3,1,5,8];
+            removeBar(8);
+            let expected = [7,3,1,5];
+            assert.deepEqual(barNo, expected);
         });
 
-        QUnit.test("is this right, no punctuation", function (assert) {
-            var mail = email("helpme@nowpls");
-            assert.equal(mail, false);
-        });
-
-        QUnit.test("is this right, no punctuation before @", function (assert) {
-            var mail = email("helpme@now.pls");
-            assert.equal(mail, false);
+        QUnit.test("Can I add a bar?", function (assert) {
+            numbers = [7,3,1,5,8];
+            addBar(2);
+            let expected = [7,3,1,5,8,2];
+            assert.deepEqual(barNo, expected);
         });
     </script>
 </body>

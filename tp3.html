@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Soundboard</title>
+</head>
+<!--
+    PLAN
+    - buttons of different colours
+    - buttons play sound on click
+    - maybe keep a list where you can replay the sounds in the order you clicked on
+    - when you replay music, there should be a dancing cat
+-->
+<style>
+    body {
+        user-select: none;
+    }
+    .buttons {
+        text-align: center;
+        background-color: palevioletred;
+        stroke: 2px crimson;
+        border-radius: 5px;
+    }
+    #pling {
+        background-color: blueviolet;
+        width: 100px;
+        height: 80px;
+        margin: 0 auto 0 auto;
+    }
+
+</style>
+<body>
+    <div class="buttons">
+        <div id="pling" onclick="playSound(this)">Test</div>
+        <div id="plong" onclick="">Testing again</div>
+        <div id="plang" onclick="">One more test</div>
+        <div id="pleng" onclick="">No more tests PLS</div>
+    </div>
+<script>
+    // model
+    var plingSound = new Audio("https://freesound.org/data/previews/502/502832_861714-lq.mp3");
+    var plongSound = new Audio("https://freesound.org/data/previews/502/502832_861714-lq.mp3");
+    var plangSound = new Audio("https://freesound.org/data/previews/502/502832_861714-lq.mp3");
+    var plengSound = new Audio("https://freesound.org/data/previews/502/502832_861714-lq.mp3");
+
+    function playSound(button) {
+        if (button.id == "pling") {
+            plingSound.play();
+        }
+    }
+    function replay(){
+
+    }
+</script>
+</body>
+</html>

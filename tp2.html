@@ -46,20 +46,24 @@
         function $(id) {return document.getElementById(id);}
         var translated = "";
         var letternumber;
-        const morseCodeArray =  [ '.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....',
+        const morseCodeArray =  ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....',
         '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.',
         '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-',
         '-.--', '--..', '/', '·−·−', '−−−·', '·−−·−'];//4 siste er space, æ ,ø og å        
         const abcdefghijklmnopqrstuvwxyzæøå = "abcdefghijklmnopqrstuvwxyz æøå";
 
         //View
-        function update() {
-            translator();
-        }
+
         //Controller
+        const node = $("input");
+        node.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                translator();
+            }
+        });
+
         function translator() {
             let inputDiv = $("input").value;
-
             let index = 0;
             while (index < inputDiv.length) {
                 letternumber = abcdefghijklmnopqrstuvwxyzæøå.indexOf(inputDiv.toLowerCase().charAt(index));

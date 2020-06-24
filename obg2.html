@@ -23,7 +23,11 @@
             let svgInnerHtml = '';
             for (let i = 0; i < numbers.length; i++) {
                 svgInnerHtml += createBar(numbers[i], i + 1);
+            console.log(svgInnerHtml);
             }
+            let disabled = "disabled";
+            if (chosenBar == null) {disabled = 'disabled';}
+            else {disabled = '';}
             contentDiv.innerHTML = `
                 <svg id="chart" width="500" viewBox="0 0 80 60">
                     ${svgInnerHtml}
@@ -32,9 +36,9 @@
                 <br />
                 Verdi:
                 <input type="number" min="1" max="10" oninput="inputValue = this.value" />
-                <button onclick="">Legg til stolpe</button>
-                <button onclick= "yourChosenBar" disabled>Endre valgt stolpe</button><br />
-                <button onclick= "yourChosenBar" disabled>Fjerne valgt stolpe</button>
+                <button onclick="addBar(inputValue)">Legg til stolpe</button>
+                <button onclick="changingBar()" ${disabled}>Endre valgt stolpe</button><br />
+                <button onclick="removeBar()" ${disabled}>Fjerne valgt stolpe</button>
                 `;
         }
     
@@ -45,23 +49,15 @@
             let height = number * 10;
             let y = 60 - height;
             let color = calcColor(1, 10, barNo);
-            if (chosenBar == chosenBar) 
-            { 
-                if (chosenBar == barNo) 
-                    {
-                    return `<rect width="${width}" height="${height}"
-                                onclick="yourChosenBar(${barNo})" style="stroke:yellow"
+            let highlightEffect;
+            if (chosenBar == barNo) {highlightEffect = 'style="stroke:yellow"';}
+            else {highlightEffect = '';}
+            return `<rect width="${width}" height="${height}"
+                                onclick="yourChosenBar(${barNo})" ${highlightEffect}
                                 x="${x}" y="${y}" fill="${color}"></rect>`;
-                    }
-                else {
-                    return `<rect width="${width}" height="${height}"
-                                onclick="yourChosenBar(${barNo})"
-                                x="${x}" y="${y}" fill="${color}"></rect>`;
-                    }
            }
-        }
 
-     function calcColor(min, max, val) {
+        function calcColor(min, max, val) {
             var minHue = 240, maxHue = 0;
             var curPercent = (val - min) / (max - min);
             var colString = "hsl(" + ((curPercent * (maxHue - minHue)) + minHue) + ",100%,50%)";
@@ -71,25 +67,24 @@
         // controller
 
         function yourChosenBar(barNo){
-        if (chosenBar == barNo) {chosenBar = null && ;}
-        else { chosenBar = barNo;}
+        if (chosenBar == barNo) {chosenBar = null;}
+        else {chosenBar = barNo;}
         show();
         }
 
-        function removeBar(){
-        if (chosenBar == barNo && ) {}
-        else { }
-        //removing a chosen bar, read up on splice
+        function removeBar(barNo){
+        if(yourChosenBar) {numbers.splice(yourChosenBar -1, 1);}
         show();
         }
 
-        function addBar(){
-        //add another bar, read up on push
+        function addBar(inputValue) {
+        if (inputValue > 0 && inputValue <= 10) {numbers.push(inputValue);}
+        else {alert("Hey, you gotta pick a number between 1 and 10, buddy!");}
         show();
         }
 
         function changingBar(){
-        //check what 
+        //check what the hecking heck i do here for the love of all things holy halp
         show();
         }
     </script>
