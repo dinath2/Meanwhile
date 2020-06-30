@@ -5,8 +5,8 @@
 </head>
 <!--
     PLAN
-    - buttons play sound on click
-    - when you replay music, there should be a dancing cat
+    - buttons play sound on click YES
+    - when you replay music, there should be a dancing cat NOT YET
 -->
 <style>
     body {
@@ -51,16 +51,21 @@
     var recording = false;
     var playbackOrder = []
     var delay = 0;
+    
     function playSound(semitone) {
+            clearInterval(x);
+            playbackOrder.push(delay);
+            
             var note = new Audio(noteLinks[semitone]);
             note.play();
+
+            delay = 0;
             if (recording == true) {
-                delay = 0;
-                setInterval(function() {
+                var x = setInterval(function() {
                     delay++;
                 },10);
+
                 playbackOrder.push(semitone);
-                playbackOrder.push(delay);
             }
     }
 
@@ -80,8 +85,6 @@
             }
         }
     }
-
-
 </script>
 </body>
 </html>
