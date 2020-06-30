@@ -51,16 +51,19 @@
     var recording = false;
     var playbackOrder = []
     var delay = 0;
-    var waiting;
+    var waiting = 0;
+    var index = 0;
     
     function playSound(semitone) {
-            playbackOrder.push(delay);
+            
 
             var note = new Audio(noteLinks[semitone]);
             note.play();
 
-            waiting = 0;
+           
             if (recording == true) {
+                playbackOrder.push(waiting);
+                waiting = 0;
                 var interval = setInterval(function() {
                     waiting++;
                 },10);
@@ -77,12 +80,14 @@
     }
 
     function playback() {
-        index = 0;
-        if (typeof playbackOrder[index] == "number") {
-                setTimeout(playSound(),playbackOrder[index])
-        } else {
-            playSound();
+        if (index < playbackOrder.length && typeof playbackOrder[index] == "number") {
+            setTimeout(playback(),playbackOrder[index]);
+            index++;
+        }
+        else if (index < playbackOrder.length) {
+            playSound(playbackOrder[index]);
             playback();
+            index++;
         }
     }
 </script>
